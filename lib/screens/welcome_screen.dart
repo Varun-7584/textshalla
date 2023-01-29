@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:textshalla/screens/login_screen.dart';
 import 'package:textshalla/screens/registration_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class WelcomeScreen extends StatefulWidget {
   /////////////

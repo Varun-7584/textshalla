@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:textshalla/screens/chat_screen.dart';
 import 'package:textshalla/screens/login_screen.dart';
 import 'package:textshalla/screens/registration_screen.dart';
