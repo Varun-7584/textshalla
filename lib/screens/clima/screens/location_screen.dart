@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:textshalla/screens/clima/utilities/constants.dart';
 import 'package:textshalla/screens/clima/services/weather.dart';
 import 'city_screen.dart';
+import 'package:textshalla/screens/clima/screens/loading_screen.dart';
 
 class LocationScreen extends StatefulWidget {
   LocationScreen({this.locationWeather});
