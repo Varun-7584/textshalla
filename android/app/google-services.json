@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "367504403042",
+    "project_id": "textshalla",
+    "storage_bucket": "textshalla.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367504403042:android:3bc2557e6a0edadc2dbf3b",
+        "android_client_info": {
+          "package_name": "com.example.textshalla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367504403042-co3bus55n0mpkpk2qcfpmsr6rsc0ovd8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJQ8ygrTULRM9R0cQw_MoMxt9hf5xm6u8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367504403042-co3bus55n0mpkpk2qcfpmsr6rsc0ovd8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

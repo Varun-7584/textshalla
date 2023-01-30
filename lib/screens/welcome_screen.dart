@@ -15,30 +15,74 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: null,
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                //Implement logout functionality
+              }),
+        ],
+        title: Text('Home',
+          style: TextStyle(
+            color: Colors.black54,
+          ),),
+        backgroundColor: Colors.lightGreen,
+      ),
+      backgroundColor: Colors.white,
       body: Container(
+
         child: Center(
-          child: Row(
+          child: Column(
             children: <Widget>[
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
-                  child: Text('Login'),
+              Expanded(child: Lottie.asset("Animation/72342-welcome.json")),
+              Expanded(child:
+                Column(
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, LoginScreen.id);
+                      },
+                      child: Text('Login',
+                      style: TextStyle(
+                        color: Colors.green
+                      ),),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, RegistrationScreen.id);
+                      },
+                      child: Text('Register',
+                      style: TextStyle(
+                        color: Colors.green.shade200
+                      ),),
+                    ),
+                  ],
                 ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, RegistrationScreen.id);
-                  },
-                  child: Text('Register'),
-                ),
-              )
-            ],
+              // Expanded(
+              //   child: TextButton(
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, LoginScreen.id);
+              //     },
+              //     child: Text('Login'),
+              //   ),
+              // ),
+              // Expanded(
+              //   child: TextButton(
+              //     onPressed: () {
+              //       Navigator.pushNamed(context, RegistrationScreen.id);
+              //     },
+              //     child: Text('Register'),
+              //   ),
+              // )
+              ),],
+
           ),
+
         ),
       ),
+
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:textshalla/screens/chat_screen.dart';
 import 'registration_screen.dart';
 import 'login_screen.dart';
+import 'package:lottie/lottie.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -13,6 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green.shade100,
       body: wid(),
     );
   }
@@ -66,19 +69,16 @@ class _widState extends State<wid> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(10),
-        child: ListView(
+
+        padding: const EdgeInsets.all(2),
+        child: Expanded(
+          child: Column(
           children: <Widget>[
-            Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
-                child: const Text(
-                  '',
-                  style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                )),
+            Expanded(
+              child: Container(
+               child: Lottie.asset('Animation/93385-login.json'),
+                  ),
+            ),
             Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.all(10),
@@ -111,18 +111,27 @@ class _widState extends State<wid> {
               onPressed: () {
                 //forgot password screen
               },
-              child: const Text(
+              child:  Text(
                 'Forgot Password',
+                style: TextStyle(
+                  color: Colors.red.shade200,
+                )
+                ,
               ),
             ),
             Container(
                 height: 50,
                 padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: ElevatedButton(
-                  child: const Text('Login'),
+                  child: Text('Login',
+                    // style: TextStyle(
+                    //     color: Colors.green.shade400),
+    ),
                   onPressed: () {
-                    print(nameController.text);
-                    print(passwordController.text);
+                    // print(nameController.text);
+                    // print(passwordController.text);
+
+                    Navigator.pushNamed(context, ChatScreen.id);
                   },
                 ),
             ),
@@ -144,6 +153,6 @@ class _widState extends State<wid> {
               mainAxisAlignment: MainAxisAlignment.center,
             ),
           ],
-        ));
+        ),),);
   }
 }
