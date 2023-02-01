@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:textshalla/chating/homepage.dart';
 import 'package:textshalla/screens/texting.dart';
 import 'login_screen.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -234,6 +235,7 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: Icon(Icons.group_work),
             onPressed: () {
               //write your script
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             },
           ),
           IconButton(

@@ -81,7 +81,7 @@ class _textApliState extends State<textApli> {
                   style: TextStyle(color: Colors.black),
               textAlign: TextAlign.center,
               cursorColor: Colors.black54,
-              obscureText: true,
+
               onChanged: (value){
 
               },
