@@ -9,7 +9,7 @@ import 'package:textshalla/screens/clima/screens/loading_screen.dart';
 // import 'package:textshalla/screens/clima/city_screen.dart';
 import 'package:textshalla/screens/clima/screens/city_screen.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:textshalla/lasttry/hpage.dart';
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
 
@@ -241,6 +241,8 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.account_box),
             onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => yHomePage()));
+
               //write your script
             },
           )
