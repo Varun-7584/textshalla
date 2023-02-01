@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:textshalla/main.dart';
+import 'package:textshalla/screens/login_screen.dart';
+import 'package:textshalla/screens/models/UserModel.dart';
 import 'chat_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'models/UserModel.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String id ='registration_id';
@@ -14,7 +19,6 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,10 +53,58 @@ class register extends StatefulWidget {
 }
 
 class _registerState extends State<register> {
- // final _auth = FirebaseAuth.instance;
+  get _auth => FirebaseAuth.instance;
   late String email;
   late String password;
 
+  ///firebase
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passController = TextEditingController();
+
+
+  ///create two functions :---
+//   void checkValues(){
+//     //store the value
+//     String email =  emailController.text.trim();
+//     //trim is used for spacing
+//     String pass = passController.text.trim();
+//     ///check that the email is not null
+//     if (email == ""|| pass == ""){
+// print("please fill all the fields ");
+//     }
+//     else
+//       {
+//        signUp( email , password);
+//       }
+//
+//   }
+  //
+  // void signUp(String email, String password) async {
+  //   UserCredential? credential;
+  //   try {
+  //     credential = await FirebaseAuth.instance.createUserWithEmailAndPassword
+  //       (email: email, password: password);
+  //   } on FirebaseAuthException catch (e){
+  //
+  //     print(e.code.toString());
+  //   }
+  //   if (credential != null ){
+  //     String uid = credential.user!.uid;
+  //     //usermodel
+  //     UserModel newUser = UserModel(
+  //       uid: uid,
+  //       email: email,
+  //       fullname:"",
+  //       profilepic: ""
+  //     );
+  //
+  //    // set funtion takes a map
+  //     await FirebaseFirestore.instance.collection("users").doc(uid).set
+  //       (newUser.toMap()).then((value) {
+  //         print("New USer Created");
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +141,7 @@ class _registerState extends State<register> {
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+
             children: <Widget>[
               Container(
                 height: 200.0,
@@ -109,6 +161,7 @@ class _registerState extends State<register> {
                         ),
                         ////////////
                         TextField(
+                          // controller: emailController,
                           textAlign: TextAlign.center,
                           cursorColor: Colors.black54,
                           keyboardType: TextInputType.emailAddress,
@@ -128,6 +181,7 @@ class _registerState extends State<register> {
                         ),
                         //////////////////////
                         TextField(
+                          // controller: passController,
                           textAlign: TextAlign.center,
                           cursorColor: Colors.black54,
                           obscureText: true,
@@ -150,9 +204,6 @@ class _registerState extends State<register> {
 
               ////////////////////////text field 1
 
-              SizedBox(
-                height: 8.0,
-              ),
               ////////////////////////////////text field 2
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 16.0),
@@ -161,10 +212,31 @@ class _registerState extends State<register> {
                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
                   elevation: 5.0,
                   child: MaterialButton(
-                    onPressed: ()async {
-                      Navigator.pushNamed(context, ChatScreen.id);
-                      //  print(email);
-                      // print(password);
+                    onPressed: () async{
+                      //
+                      // signUp( email, password);
+                      // // Navigator.pushNamed(context, ChatScreen.id);
+                      //   print(email);
+                      //  print(password);
+                      // FirebaseAuth.instance
+                      //     .createUserWithEmailAndPassword(email: emailController.text, password: passController.text)
+                      //     .then((value){
+                      //   print("new Account Created");
+                      //  Navigator.pushNamed(context, LoginScreen.id);
+                      // }).onError((error, stackTrace) {
+                      //   print("Error${error.toString()}");
+                      // });
+                      try{
+                      final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+                      print(newUser);
+                      if (newUser!= null ) {
+                        Navigator.pushNamed(context, LoginScreen.id);
+                      }
+                      }
+                      catch(e){
+                        print(e);
+                      }
+
                 // try{
                 //   final newUser = await _auth.createUserWithEmailAndPassword(email: email, password: password);
                 //

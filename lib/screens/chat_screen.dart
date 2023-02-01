@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:textshalla/screens/texting.dart';
 import 'login_screen.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'registration_screen.dart';
@@ -23,9 +24,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
 
 
-  //create a method for getting the authentication
-
-  //back from rebistration screen
   // void getCurrentUser ()async {
   //   try{
   //     final user = await _auth.currentUser;
@@ -228,9 +226,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.message),
             onPressed: () {
-setState(() {
-
-});
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Texting()));
 
             },
           ),
