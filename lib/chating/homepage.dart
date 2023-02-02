@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:textshalla/main.dart';
 import 'package:textshalla/chating/chatpage.dart';
 import 'package:textshalla/comps/styles.dart';
 import 'package:textshalla/comps/widgets.dart';
 import 'package:textshalla/func/functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -21,13 +23,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   bool open  = false;
+  //instance of firestore
+  final firestore = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.indigo.shade400,
       appBar: AppBar(
         backgroundColor: Colors.indigo.shade400,
-        title: const Text('Flash Chat'),
+        title: const Text('Textshalla'),
         elevation: 0,
         centerTitle: true,
         actions: [
@@ -75,11 +79,36 @@ class _MyHomePageState extends State<MyHomePage> {
                         Container(
                           margin: const EdgeInsets.symmetric(vertical: 10),
                           height: 80,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, i) {
-                              return ChatWidgets.circleProfile();
-                            },
+                          child: StreamBuilder(
+                            stream: firestore.collection('Rooms').snapshots(),
+                            builder: (context,AsyncSnapshot<QuerySnapshot> snapshot) {
+                              //to get recent chats
+                              List data = !snapshot.hasData? [] :snapshot.data!.docs.where((element) => element['users'].toString().contains(FirebaseAuth.instance.currentUser!.uid)).toList();
+                              return ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                //pass length of the data as item
+                                itemCount: data.length,
+                                itemBuilder: (context, i) {
+                                  List users = data[i]['users'];
+                                  var friend = users.where((element)=>element != FirebaseAuth.instance.currentUser!.uid);
+                                  var user = friend.isNotEmpty ? friend.first : users .where((element)=>element ==FirebaseAuth.instance. currentUser!.uid).first ;
+                                  return FutureBuilder(
+                                    future: firestore.collection('Users').doc(user).get(),
+                                    builder: (context, AsyncSnapshot snap) {
+                                      return ChatWidgets.circleProfile(onTap: (){
+
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                                        {return ChatPage(id: user,name:snap.data['name']);
+                                          }),
+
+                                        );
+                                      },name: snap.data['name']);
+                                    }
+                                  );
+                                },
+                              );
+                            }
+
                           ),
                         ),
                       ],
@@ -104,25 +133,44 @@ class _MyHomePageState extends State<MyHomePage> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                            child: ListView.builder(
-                              itemBuilder: (context, i) {
-                                return ChatWidgets.card(
-                                  title: 'John Doe',
-                                  subtitle: 'Hi, How are you !',
-                                  time: '04:40',
-                                  onTap: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return const ChatPage(
-                                            id: '',
-                                          );
-                                        },
-                                      ),
+                            child: StreamBuilder(
+                              stream: firestore.collection('Rooms').snapshots(),
+                              builder: (context, AsyncSnapshot<QuerySnapshot>snapshot) {
+                                //to get the rooms
+                                List data = !snapshot.hasData?[]: snapshot.data!.docs.where((element)=>element['users'].toString().contains(FirebaseAuth.instance.currentUser!.uid)).toList();
+                                return ListView.builder(
+                                  //pass the length of the data
+                                  itemCount: data.length,
+                                  itemBuilder: (context, i) {
+                                    List users = data[i]['users'];
+                                    var friend = users.where((element)=>element != FirebaseAuth.instance.currentUser!.uid);
+                                    var user = friend.isNotEmpty ? friend.first : users .where((element)=>element ==FirebaseAuth.instance. currentUser!.uid).first ;
+                                    return FutureBuilder(
+                                      future: firestore.collection('Users').doc(user).get(),
+                                      builder: (context,AsyncSnapshot snap) {
+                                        return
+                                          !snap.hasData? Container():ChatWidgets.card(
+                                          title: snap.data['name'],
+                                          subtitle: 'Hello !',
+                                          time: '12;00',
+                                          onTap: () {
+                                            Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                builder: (context) {
+                                                  return ChatPage(
+                                                    id: user,
+                                                    name :snap.data['name'],
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      }
                                     );
                                   },
                                 );
-                              },
+                              }
                             ),
                           ),
                         ),

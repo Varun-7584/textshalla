@@ -1,10 +1,19 @@
 import 'dart:async';
 
+<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:textshalla/comps/widgets.dart';
 import 'package:textshalla/chating/chatpage.dart';
+=======
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:textshalla/comps/widgets.dart';
+import 'package:textshalla/chating/homepage.dart';
+import '../chating/chatpage.dart';
+
+>>>>>>> origin/master
 
 class AnimatedDialog extends StatefulWidget {
   final double height;
@@ -17,6 +26,7 @@ class AnimatedDialog extends StatefulWidget {
   State<AnimatedDialog> createState() => _AnimatedDialogState();
 }
 
+<<<<<<< HEAD
 /////declare
 final firestore = FirebaseFirestore.instance;
 final controller = TextEditingController();
@@ -24,6 +34,12 @@ String search = '';
 
 class _AnimatedDialogState extends State<AnimatedDialog> {
   bool show = false;
+=======
+class _AnimatedDialogState extends State<AnimatedDialog> {
+  bool show = false;
+
+  get data => null;
+>>>>>>> origin/master
   @override
   Widget build(BuildContext context) {
     if(widget.height != 0){
@@ -54,6 +70,7 @@ class _AnimatedDialogState extends State<AnimatedDialog> {
               )),
           child: widget.width == 0 ? null : !show ? null :  Column(
             children: [
+<<<<<<< HEAD
               ///editable
               ChatWidgets.searchField(
                 onChange: (a){
@@ -92,6 +109,32 @@ class _AnimatedDialogState extends State<AnimatedDialog> {
                         },
                       );
                     }
+=======
+              ChatWidgets.searchField(),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: ListView.builder(
+                    itemCount: 2,
+                    itemBuilder: (context, i) {
+                      return ChatWidgets.card(
+                        title: data[i]['name'],
+                        time: DateFormat('EEE hh:mm'),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return ChatPage(
+                                  id: data[i].id.toString(),
+                                  name: data[i]['name'],
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      );
+                    },
+>>>>>>> origin/master
                   ),
                 ),
               ),
@@ -101,4 +144,8 @@ class _AnimatedDialogState extends State<AnimatedDialog> {
       ],
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/master

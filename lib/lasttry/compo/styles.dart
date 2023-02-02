@@ -47,18 +47,10 @@ class Styles {
     return Container(
       margin: const EdgeInsets.all(10),
       child: TextField(
-<<<<<<< HEAD
-       onChanged: onChange,
-=======
         onChanged: onChange,
->>>>>>> origin/master
         decoration: Styles.searchTextFieldStyle(),
       ),
       decoration: Styles.messageFieldCardStyle(),
     );
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master

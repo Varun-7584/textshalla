@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:textshalla/lasttry/compo/animated.dart';
 import 'package:textshalla/comps/animated-dialog.dart';
 import 'package:textshalla/comps/styles.dart';
+
+import '../../comps/animated-dialog.dart';
+import '../../comps/styles.dart';
 
 class ChatWidgets {
   static Widget card({title, time, subtitle, onTap}) {
@@ -32,11 +36,7 @@ class ChatWidgets {
     );
   }
 
-<<<<<<< HEAD
   static Widget circleProfile({onTap}) {
-=======
-  static Widget circleProfile({onTap , name }) {
->>>>>>> origin/master
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       child: InkWell(
@@ -53,24 +53,15 @@ class ChatWidgets {
                 color: Colors.white,
               ),
             ),
-<<<<<<< HEAD
             SizedBox(width: 50,child: Center(child: Text('John',style: TextStyle(height: 1.5,fontSize: 12,color: Colors.white),overflow: TextOverflow.ellipsis,)))
-=======
-            SizedBox(width: 50,child: Center(child: Text('name',style: TextStyle(height: 1.5,fontSize: 12,color: Colors.white),overflow: TextOverflow.ellipsis,)))
->>>>>>> origin/master
           ],
         ),
       ),
     );
   }
 
-<<<<<<< HEAD
   static Widget messagesCard(i, message, time) {
     bool check = i % 2 == 0;
-=======
-  static Widget messagesCard( check, message, time) {
-
->>>>>>> origin/master
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -169,11 +160,11 @@ class ChatWidgets {
   }
 
   static searchBar(bool open, ) {
-    return AnimatedDialog(
-      height: open ? 800 : 0,
-      width: open ? 400 : 0,
-
-    );
+    // return AnimatedDialog(
+    //   height: open ? 800 : 0,
+    //   width: open ? 400 : 0,
+    //
+    // );
   }
 
   static searchField({Function(String)? onChange}) {
@@ -181,17 +172,9 @@ class ChatWidgets {
       margin: const EdgeInsets.all(10),
       decoration: Styles.messageFieldCardStyle(),
       child: TextField(
-<<<<<<< HEAD
-       onChanged: onChange,
-=======
         onChanged: onChange,
->>>>>>> origin/master
         decoration: Styles.searchTextFieldStyle(),
       ),
     );
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/master

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:textshalla/chating/homepage.dart';
 import 'package:textshalla/screens/texting.dart';
 import 'login_screen.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +9,7 @@ import 'package:textshalla/screens/clima/screens/loading_screen.dart';
 // import 'package:textshalla/screens/clima/city_screen.dart';
 import 'package:textshalla/screens/clima/screens/city_screen.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:textshalla/lasttry/hpage.dart';
 class ChatScreen extends StatefulWidget {
   static const String id = 'chat_screen';
 
@@ -234,11 +235,14 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: Icon(Icons.group_work),
             onPressed: () {
               //write your script
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
             },
           ),
           IconButton(
             icon: Icon(Icons.account_box),
             onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => yHomePage()));
+
               //write your script
             },
           )
